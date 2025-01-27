@@ -1,44 +1,68 @@
 services:
   postgres:
     container_name: ms_pg_sql
-    image: postgres:16-alpine
+    image: postgres
     environment:
       POSTGRES_USER: yassine
       POSTGRES_PASSWORD: admin
-      PGDATA: /var/lib/postgresql/data
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - postgres_ecom:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5444:5432"
     networks:
       - microservices-net
     restart: unless-stopped
 
+#  mongodb:
+#    container_name: ms_mongo_db
+#    image: mongo:6
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: yassine
+#      MONGO_INITDB_ROOT_PASSWORD: admin
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_ecom:/data/db
+##    restart: unless-stopped
+#    networks:
+#      - microservices-net
+#
+#  mongo-express:
+#    container_name: ms_mongo_express
+#    image: mongo-express
+#    ports:
+#      - "8081:8081"
+#    environment:
+#     ME_CONFIG_MONGODB_ADMINUSERNAME: yassine
+#     ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+#     ME_CONFIG_MONGODB_URL: mongodb://yassine:admin@ms_mongo_db:27017/
+#    depends_on:
+#      - mongodb
+#    restart: always
+#    networks:
+#      - microservices-net
+
   mongodb:
-    container_name: ms_mongo_db
     image: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: yassine
-      MONGO_INITDB_ROOT_PASSWORD: admin
+    container_name: mongo_db
     ports:
       - 27017:27017
     volumes:
-      - mongo:/data
-
-    restart: unless-stopped
+      - mongo_ecome_2:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=yassine
+      - MONGO_INITDB_ROOT_PASSWORD=admin
 
   mongo-express:
-    container_name: ms_mongo_express
     image: mongo-express
+    container_name: mongo_express
+    restart: always
     ports:
       - 8081:8081
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=yassine
       - ME_CONFIG_MONGODB_ADMINPASSWORD=admin
       - ME_CONFIG_MONGODB_SERVER=mongodb
-
-    restart: always
-
 
   mail-dev :
     container_name: ms_mail_dev
@@ -47,10 +71,67 @@ services:
       - 1080:1080
       - 1025:1025
 
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "22181:2181"
+    networks:
+      - microservices-net
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: ms_kafka
+    ports:
+      - "9092:9092"
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+    networks:
+      - microservices-net
+
+  rabbitmq:
+    container_name: ms_rabbitmq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"    # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ management UI port
+    environment:
+      RABBITMQ_DEFAULT_USER: yassine
+      RABBITMQ_DEFAULT_PASS: admin
+    networks:
+      - microservices-net
+    restart: unless-stopped
+  redis:
+    container_name: ms_redis
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - microservices-net
+    restart: unless-stopped
+
+  zipkin:
+    container_name: zipkin
+    image: openzipkin/zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - microservices-net
+
 networks:
   microservices-net:
     driver: bridge
 
 volumes:
-  postgres:
-  mongo:
+  postgres_ecom:
+  mongo_ecome_2:

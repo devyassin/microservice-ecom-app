@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f6627c53-baed-44a6-9609-98d2135832ff" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
+  <component name="ProjectId" id="2mTjLADLSW9O6go9S42ucfitI8S" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "kotlin-language-version-configured": "true",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f6627c53-baed-44a6-9609-98d2135832ff" name="Changes" comment="" />
+      <created>1727107404387</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727107404387</updated>
+      <workItem from="1727107405496" duration="1000" />
+    </task>
+    <servers />
+  </component>
+</project>

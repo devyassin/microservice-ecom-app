@@ -1,1 +1,31 @@
-spring.application.name=config-server
+spring:
+  profiles:
+    active: git
+  #    active: native
+  application:
+    name: config-server
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "yassine"
+    password: "admin"
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: classpath:/configurations/prod
+        git:
+          uri: "git@github.com:devyassin/e-commerce-app-config-server.git"
+          default-label: master
+          search-paths: dev
+          timeout: 5
+          clone-on-start: true
+          force-pull: true
+server:
+  port: 8888
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
