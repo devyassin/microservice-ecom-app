@@ -1,0 +1,20 @@
+spring:
+  data:
+    mongodb:
+      username: yassine
+      password: admin
+      host: localhost
+      port: 27017
+      authentication-database: admin
+      database: customer
+server:
+  port: 8090
+
+support:
+  message: "Welcome to customer microservice prod app support"
+  contactDetails:
+    name: "yassine lamouadden - Full Stack Developer"
+    email: "mouden529@gmail.com"
+  onCallSupport:
+    - +212 651358737
+    - +212 651358737
